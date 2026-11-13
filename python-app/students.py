@@ -36,9 +36,7 @@ def get_student(conn, student_id):
 
 
 def average_grade(conn):
-    """Retourne la moyenne des notes.
-
-    TODO (exercice 2) : écrire une requête SQL avec AVG(grade),
-    puis retourner le résultat sous forme de float.
-    """
-    raise NotImplementedError("average_grade n'est pas encore écrite")
+    with conn.cursor() as cur:
+        cur.execute("SELECT AVG(grade) FROM students")
+        result = cur.fetchone()[0]
+    return float(result) if result is not None else 0.0
